@@ -9,6 +9,11 @@
     "signale": "1.4.0",
     "@pw-codeceptjs/test-fixture": "0.0.3"
   },
+  "files": [
+    "lib",
+    "src",
+    "README.md"
+  ],
   "homepage": "https://reutenkoivan.github.io/pw-codeceptjs/",
   "bugs": {
     "url": "https://github.com/reutenkoivan/pw-codeceptjs/issues"

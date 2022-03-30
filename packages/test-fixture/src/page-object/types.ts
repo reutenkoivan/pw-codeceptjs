@@ -1,6 +1,6 @@
 import { Locator, Page } from '@playwright/test'
 
-export namespace CodeceptFixtureTypes {
+export namespace PageObjectTypes {
   export type amOnPage = (url: string) => Promise<void>
   export type waitForText = (text: string, options: { locator: string }) => Promise<void>
   export type waitForURL = Page['waitForURL']

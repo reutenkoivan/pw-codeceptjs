@@ -4,7 +4,7 @@ import assert from 'assert'
 import { expect, test } from '@playwright/test'
 
 import { Driver } from './driver'
-import type { CodeceptFixtureTypes } from './types'
+import type { PageObjectTypes } from './types'
 
 export class CodeceptFixture extends Driver {
   /*
@@ -17,7 +17,7 @@ export class CodeceptFixture extends Driver {
 
   /* === Page === */
 
-  amOnPage: CodeceptFixtureTypes.amOnPage = async (url) => {
+  amOnPage: PageObjectTypes.amOnPage = async (url) => {
     const page = await this.getPage()
 
     await test.step('amOnPage', async () => {
@@ -25,7 +25,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  waitForURL: CodeceptFixtureTypes.waitForURL = async (urlPart) => {
+  waitForURL: PageObjectTypes.waitForURL = async (urlPart) => {
     const page = await this.getPage()
 
     await test.step('waitForURL', async () => {
@@ -33,7 +33,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  refreshPage: CodeceptFixtureTypes.refreshPage = async () => {
+  refreshPage: PageObjectTypes.refreshPage = async () => {
     const page = await this.getPage()
 
     await test.step('refreshPage', async () => {
@@ -41,7 +41,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  workWithTab: CodeceptFixtureTypes.workWithTab = async (id) => {
+  workWithTab: PageObjectTypes.workWithTab = async (id) => {
     const pages = this.context.pages()
 
     await test.step('workWithTab', async () => {
@@ -53,14 +53,14 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  createTab: CodeceptFixtureTypes.createTab = async () => {
+  createTab: PageObjectTypes.createTab = async () => {
     await test.step('createTab', async () => {
       await this.context.newPage()
       await this.workWithTab(this.context.pages().length - 1)
     })
   }
 
-  closeTab: CodeceptFixtureTypes.closeTab = async (closeTabID) => {
+  closeTab: PageObjectTypes.closeTab = async (closeTabID) => {
     const pages = this.context.pages()
 
     await test.step('closeTab', async () => {
@@ -75,7 +75,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  click: CodeceptFixtureTypes.click = async (locator, { createsNewPage, ...restOptions } = {}) => {
+  click: PageObjectTypes.click = async (locator, { createsNewPage, ...restOptions } = {}) => {
     const page = await this.getPage()
 
     await test.step('click', async () => {
@@ -113,7 +113,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  waitForText: CodeceptFixtureTypes.waitForText = async (text, { locator }) => {
+  waitForText: PageObjectTypes.waitForText = async (text, { locator }) => {
     const page = await this.getPage()
 
     await test.step('waitForText', async () => {
@@ -145,7 +145,7 @@ export class CodeceptFixture extends Driver {
 
   /* === Inputs === */
 
-  appendField: CodeceptFixtureTypes.appendField = async (text, { locator }) => {
+  appendField: PageObjectTypes.appendField = async (text, { locator }) => {
     const page = await this.getPage()
 
     await test.step('appendField', async () => {
@@ -155,7 +155,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  clearField: CodeceptFixtureTypes.clearField = async (locator) => {
+  clearField: PageObjectTypes.clearField = async (locator) => {
     const page = await this.getPage()
 
     await test.step('clearField', async () => {
@@ -165,7 +165,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  fillField: CodeceptFixtureTypes.fillField = async (text, { locator }) => {
+  fillField: PageObjectTypes.fillField = async (text, { locator }) => {
     const page = await this.getPage()
 
     await test.step('fillField', async () => {
@@ -175,7 +175,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  attachFile: CodeceptFixtureTypes.attachFile = async (locator, { filePath }) => {
+  attachFile: PageObjectTypes.attachFile = async (locator, { filePath }) => {
     const page = await this.getPage()
     const absFilePath = path.resolve(filePath)
 
@@ -193,7 +193,7 @@ export class CodeceptFixture extends Driver {
 
   /* === System === */
 
-  pressKey: CodeceptFixtureTypes.pressKey = async (key) => {
+  pressKey: PageObjectTypes.pressKey = async (key) => {
     const page = await this.getPage()
 
     await test.step('pressKey', async () => {
@@ -201,7 +201,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  clearCookie: CodeceptFixtureTypes.clearCookie = async (cookieNames) => {
+  clearCookie: PageObjectTypes.clearCookie = async (cookieNames) => {
     const page = await this.getPage()
 
     await test.step('clearCookie', async () => {

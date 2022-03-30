@@ -13,7 +13,7 @@ env:
   browser: true
 globals:
   NodeJS: true
-  codeceptFixtureTypes: 'readonly'
+  codeceptjsFixtureTypes: 'readonly'
 parser: '@typescript-eslint/parser'
 parserOptions:
   ecmaVersion: '2020'
