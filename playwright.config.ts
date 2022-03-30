@@ -11,7 +11,7 @@ const config: PlaywrightTestConfig<CodeceptFixtureConfig> = {
     codeceptjs: {
       extensions: {
         utils: Utils,
-      }
+      },
     },
   },
   projects: [
