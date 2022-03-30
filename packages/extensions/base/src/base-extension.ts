@@ -21,7 +21,7 @@ export class BaseExtension {
 
   /* === Hooks === === === === === === === === === === === === === === === === === === === === === === === === === */
 
-  async init(_options: { codeceptExtensions: codeceptFixtureTypes.extensions }): Promise<void> {}
+  async init(_options: { extensions: codeceptjsFixtureTypes.extensions }): Promise<void> {}
 
   async _before(): Promise<void> {}
 

@@ -13,7 +13,7 @@ export class Driver {
   }
 
   use: {
-    [T in keyof codeceptFixtureTypes.extensions]: InstanceType<codeceptFixtureTypes.extensions[T]>
+    [T in keyof codeceptjsFixtureTypes.extensions]: InstanceType<codeceptjsFixtureTypes.extensions[T]>
   } = {} as any
 
   constructor({ browser, browserName }: { browser: Browser; browserName: string }) {
@@ -24,15 +24,15 @@ export class Driver {
 
   /* === Hooks === === === === === === === === === === === === === === === === === === === === === === === === === */
 
-  async init({ codeceptExtensions }: { codeceptExtensions: codeceptFixtureTypes.extensions }) {
+  async init({ extensions }: { extensions: codeceptjsFixtureTypes.extensions }) {
     const contexts = this.browser.contexts()
 
     this.context = contexts.length
       ? contexts[0]
       : await this.browser.newContext()
 
-    for (const key of objectKeys(codeceptExtensions)) {
-      const Extension = codeceptExtensions[key]
+    for (const key of objectKeys(extensions)) {
+      const Extension = extensions[key]
 
       this.use[key] = new Extension({
         browser: this.browser,
@@ -45,7 +45,7 @@ export class Driver {
         },
       })
 
-      await this.use[key].init({ codeceptExtensions })
+      await this.use[key].init({ extensions })
       this.extensions.push(this.use[key])
     }
   }

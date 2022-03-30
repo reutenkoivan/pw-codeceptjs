@@ -1,6 +1,6 @@
 import { PlaywrightTestConfig, devices } from '@playwright/test'
-import { Utils } from '@pw-codeceptjs/utils-extension'
 import { CodeceptFixtureConfig } from '@pw-codeceptjs/test'
+import { Utils } from '@pw-codeceptjs/utils-extension'
 
 const config: PlaywrightTestConfig<CodeceptFixtureConfig> = {
   forbidOnly: !!process.env.CI,
@@ -8,8 +8,10 @@ const config: PlaywrightTestConfig<CodeceptFixtureConfig> = {
   reporter: [['html']],
   use: {
     headless: !!process.env.CI,
-    codeceptExtensions: {
-      utils: Utils,
+    codeceptjs: {
+      extensions: {
+        utils: Utils,
+      }
     },
   },
   projects: [

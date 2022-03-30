@@ -1,3 +1,5 @@
 export interface CodeceptFixtureConfig {
-  codeceptExtensions: codeceptFixtureTypes.extensions
+  codeceptjs?: {
+    extensions?: codeceptjsFixtureTypes.extensions
+  }
 }

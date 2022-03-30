@@ -7,14 +7,16 @@ interface CodeceptFixtureInterface {
 }
 
 export const test = base.extend<CodeceptFixtureConfig & CodeceptFixtureInterface>({
-  codeceptExtensions: [
+  codeceptjs: [
     {} as any,
     { option: true },
   ],
-  I: async ({ browser, browserName, codeceptExtensions }, use) => {
+  I: async ({ browser, browserName, codeceptjs }, use) => {
+    const { extensions = {} as codeceptjsFixtureTypes.extensions } = codeceptjs
+
     const codeceptFixture = new CodeceptFixture({ browser, browserName })
 
-    await codeceptFixture.init({ codeceptExtensions })
+    await codeceptFixture.init({ extensions })
 
     await codeceptFixture._before()
     await use(codeceptFixture)
