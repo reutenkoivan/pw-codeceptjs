@@ -1,0 +1,19 @@
+{
+  "name": "@pw-codeceptjs/utils-extension",
+  "version": "0.0.1",
+  "author": "Ivan Reutenko",
+  "license": "MIT",
+  "main": "lib/index",
+  "dependencies": {
+    "tslib": "^2.3.1",
+    "@pw-codeceptjs/base-extension": "0.0.1"
+  },
+  "homepage": "https://reutenkoivan.github.io/pw-codeceptjs/",
+  "bugs": {
+    "url": "https://github.com/reutenkoivan/pw-codeceptjs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reutenkoivan/pw-codeceptjs.git"
+  }
+}
