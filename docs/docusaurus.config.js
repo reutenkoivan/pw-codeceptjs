@@ -18,13 +18,13 @@ const searchTranslations = {
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '@pw-codecepJS',
+  title: '@pw-codeceptjs',
   url: 'https://reutenkoivan.github.io',
-  baseUrl: process.env.CI ? '/pw-codecepjs/' : '/',
+  baseUrl: process.env.CI ? '/pw-codeceptjs/' : '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'favicon.ico',
-  projectName: 'pw-codecepjs',
+  projectName: 'pw-codeceptjs',
   themes: [
     [
       '@docusaurus/theme-classic',
