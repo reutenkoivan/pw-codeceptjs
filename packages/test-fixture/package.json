@@ -1,6 +1,6 @@
 {
   "name": "@pw-codeceptjs/test-fixture",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Ivan Reutenko",
   "license": "MIT",
   "main": "lib/index",
