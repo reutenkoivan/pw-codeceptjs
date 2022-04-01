@@ -21,7 +21,7 @@ const FeatureList: FeatureItem[] = [
     ),
     fileName: 'base.spec.ts',
     code: `
-import { test } from '@pw-codeceptjs/test-fixture'
+import { test } from '@pw-codeceptjs/test'
 
 test.describe('Fixture', () => {
   test('test #1', async ({ I }) => {
@@ -39,7 +39,7 @@ test.describe('Fixture', () => {
     ),
     fileName: 'extension.spec.ts',
     code: `
-import { test } from '@pw-codeceptjs/test-fixture'
+import { test } from '@pw-codeceptjs/test'
 
 test.describe('Fixture', () => {
   test('test #1', async ({ I }) => {
