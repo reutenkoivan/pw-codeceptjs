@@ -1,6 +1,6 @@
 {
   "name": "@pw-codeceptjs/base-extension",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": "Ivan Reutenko",
   "license": "MIT",
   "main": "lib/index",
