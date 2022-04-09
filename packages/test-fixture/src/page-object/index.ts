@@ -1,10 +1,9 @@
 import fs from 'fs'
 import path from 'path'
 import assert from 'assert'
-import { expect, test } from '@playwright/test'
+import { expect, Locator, Page, test } from '@playwright/test'
 
 import { Driver } from './driver'
-import type { PageObjectTypes } from './types'
 
 export class CodeceptFixture extends Driver {
   /*
@@ -17,7 +16,7 @@ export class CodeceptFixture extends Driver {
 
   /* === Page === */
 
-  amOnPage: PageObjectTypes.amOnPage = async (url) => {
+  async amOnPage (url: string): Promise<void> {
     const page = await this.getPage()
 
     await test.step('amOnPage', async () => {
@@ -25,15 +24,15 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  waitForURL: PageObjectTypes.waitForURL = async (urlPart) => {
+  async waitForURL (urlPart: Parameters<Page['waitForURL']>[0], options?: Parameters<Page['waitForURL']>[1]): Promise<void> {
     const page = await this.getPage()
 
     await test.step('waitForURL', async () => {
-      await page.waitForURL(urlPart)
+      await page.waitForURL(urlPart, options)
     })
   }
 
-  refreshPage: PageObjectTypes.refreshPage = async () => {
+  async refreshPage (): Promise<void> {
     const page = await this.getPage()
 
     await test.step('refreshPage', async () => {
@@ -41,7 +40,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  workWithTab: PageObjectTypes.workWithTab = async (id) => {
+  async workWithTab (id: number): Promise<void> {
     const pages = this.context.pages()
 
     await test.step('workWithTab', async () => {
@@ -53,14 +52,14 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  createTab: PageObjectTypes.createTab = async () => {
+  async createTab (): Promise<void> {
     await test.step('createTab', async () => {
       await this.context.newPage()
       await this.workWithTab(this.context.pages().length - 1)
     })
   }
 
-  closeTab: PageObjectTypes.closeTab = async (closeTabID) => {
+  async closeTab (closeTabID?: number): Promise<void> {
     const pages = this.context.pages()
 
     await test.step('closeTab', async () => {
@@ -75,7 +74,10 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  click: PageObjectTypes.click = async (locator, { createsNewPage, ...restOptions } = {}) => {
+  async click (
+    locator: string,
+    { createsNewPage, ...restOptions }: { createsNewPage?: boolean } & Parameters<Locator['click']>[0] = {}
+  ): Promise<void> {
     const page = await this.getPage()
 
     await test.step('click', async () => {
@@ -95,7 +97,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  doubleClick = async (locator) => {
+  async doubleClick (locator: string): Promise<void> {
     const page = await this.getPage()
 
     await test.step('doubleClick', async () => {
@@ -105,7 +107,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  dragAndDrop = async (source, target) => {
+  async dragAndDrop (source: string, target: string): Promise<void> {
     const page = await this.getPage()
 
     await test.step('dragAndDrop', async () => {
@@ -113,7 +115,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  waitForText: PageObjectTypes.waitForText = async (text, { locator }) => {
+  async waitForText (text: string, { locator }: { locator: string }): Promise<void> {
     const page = await this.getPage()
 
     await test.step('waitForText', async () => {
@@ -123,7 +125,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  waitForNoText = async (text, { locator }) => {
+  async waitForNoText (text: string, { locator }: { locator: string }): Promise<void> {
     const page = await this.getPage()
 
     await test.step('waitForNoText', async () => {
@@ -133,7 +135,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  seeAttribute = async (attribute, value, locator) => {
+  async seeAttribute (attribute: string, value: null | string, locator: string): Promise<void> {
     const page = await this.getPage()
 
     await test.step('seeAttribute', async () => {
@@ -145,7 +147,7 @@ export class CodeceptFixture extends Driver {
 
   /* === Inputs === */
 
-  appendField: PageObjectTypes.appendField = async (text, { locator }) => {
+  async appendField (text: string, { locator }: { locator: string }): Promise<void> {
     const page = await this.getPage()
 
     await test.step('appendField', async () => {
@@ -155,7 +157,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  clearField: PageObjectTypes.clearField = async (locator) => {
+  async clearField (locator: string): Promise<void> {
     const page = await this.getPage()
 
     await test.step('clearField', async () => {
@@ -165,7 +167,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  fillField: PageObjectTypes.fillField = async (text, { locator }) => {
+  async fillField (text: string, { locator }: { locator: string }) {
     const page = await this.getPage()
 
     await test.step('fillField', async () => {
@@ -175,7 +177,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  attachFile: PageObjectTypes.attachFile = async (locator, { filePath }) => {
+  async attachFile (locator: string, { filePath }: { filePath: string }): Promise<void> {
     const page = await this.getPage()
     const absFilePath = path.resolve(filePath)
 
@@ -193,7 +195,7 @@ export class CodeceptFixture extends Driver {
 
   /* === System === */
 
-  pressKey: PageObjectTypes.pressKey = async (key) => {
+  async pressKey (key: string): Promise<void> {
     const page = await this.getPage()
 
     await test.step('pressKey', async () => {
@@ -201,7 +203,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  clearCookie: PageObjectTypes.clearCookie = async (cookieNames) => {
+  async clearCookie (cookieNames?: string | string[]): Promise<void> {
     const page = await this.getPage()
 
     await test.step('clearCookie', async () => {
@@ -225,7 +227,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  dontSeeCookies = async (cookies) => {
+  async dontSeeCookies (cookies: string[]): Promise<void> {
     const page = await this.getPage()
 
     await test.step('dontSeeCookie', async () => {
