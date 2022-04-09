@@ -37,6 +37,9 @@ jobs:
           PR_BODY: ${{ steps.PRMeta.outputs.pr_body }}
         run: node ./scripts/release/update.js --debug
 
+      - name: Update package-lock.
+        run: npm i
+
       - uses: EndBug/add-and-commit@v9
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
