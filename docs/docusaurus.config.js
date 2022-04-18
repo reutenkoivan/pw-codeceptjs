@@ -1,7 +1,9 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+const fs = require('fs')
 const path = require('path')
+const glob = require('glob')
 const lightCodeTheme = require('prism-react-renderer/themes/github')
 const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 
@@ -50,12 +52,6 @@ const config = {
   ],
   plugins: [
     [
-      require.resolve('./plugins/plugin-workspace-content'),
-      {
-        root: path.join(__dirname, '..'),
-      },
-    ],
-    [
       '@docusaurus/plugin-content-docs',
       {
         path: path.join(__dirname, 'content'),
@@ -103,4 +99,65 @@ if (process.argv.slice(-1)[0] === 'start') {
   config.plugins.push('@docusaurus/plugin-debug')
 }
 
-module.exports = config
+const getDocRoots = ({ root, pattern }) => {
+  const { workspaces } = require(path.join(root, 'package.json'))
+
+  const packages = workspaces
+    .reduce((acc, workspacePattern) => {
+      const packagePattern = path.join(root, workspacePattern, 'package.json')
+      const roots = glob
+        .sync(packagePattern, { ignore: '**/node_modules/**' })
+        .map(packageJson => path.dirname(packageJson))
+
+      return acc.concat(roots)
+    }, [])
+
+  const docRoots = packages.reduce((acc, packageRoot) => {
+    const docRootPattern = path.join(packageRoot, pattern)
+
+    return acc.concat(glob.sync(docRootPattern, { ignore: '**/node_modules/**' }))
+  }, [])
+
+  return docRoots.filter(dir => fs.existsSync(dir))
+}
+
+module.exports = () => {
+  const root = path.join(__dirname, '..')
+  const docRoots = getDocRoots({ root, pattern: 'doc' })
+
+  const mappedPlugins = docRoots.map(docRoot => {
+    const rel = docRoot.replace(`${root}/`, '').split('/').slice(1, -1)
+
+    return [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: rel.join('-'),
+        routeBasePath: rel.join('/'),
+        path: path.relative(process.cwd(), docRoot),
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+      }
+    ]
+  })
+
+  config.plugins.push(...mappedPlugins)
+
+  const links = docRoots.map(docRoot => {
+    const rel = docRoot.replace(`${root}/`, '').split('/').slice(1, -1)
+
+    return {
+      label: require(path.join(docRoot, '..', 'package.json')).name,
+      to: rel.join('/'),
+      location: path.relative(process.cwd(), docRoot)
+    }
+  })
+
+  // @ts-ignore
+  config.themeConfig.navbar.items.push({
+    type: 'dropdown',
+    label: 'Packages',
+    items: links,
+  })
+
+  return config
+}
