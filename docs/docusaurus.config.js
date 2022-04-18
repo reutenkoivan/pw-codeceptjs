@@ -22,6 +22,7 @@ const config = {
   url: 'https://reutenkoivan.github.io',
   baseUrl: process.env.CI ? '/pw-codeceptjs/' : '/',
   onBrokenLinks: 'throw',
+  onDuplicateRoutes: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'favicon.ico',
   projectName: 'pw-codeceptjs',
@@ -48,6 +49,12 @@ const config = {
     ],
   ],
   plugins: [
+    [
+      require.resolve('./plugins/plugin-workspace-content'),
+      {
+        root: path.join(__dirname, '..'),
+      },
+    ],
     [
       '@docusaurus/plugin-content-docs',
       {
@@ -90,6 +97,10 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+}
+
+if (process.argv.slice(-1)[0] === 'start') {
+  config.plugins.push('@docusaurus/plugin-debug')
 }
 
 module.exports = config
