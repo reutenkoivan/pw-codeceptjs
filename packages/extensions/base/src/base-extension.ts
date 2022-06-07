@@ -1,5 +1,5 @@
-import { Browser, BrowserContext } from '@playwright/test'
 import { Signale } from 'signales'
+import { Browser, BrowserContext } from '@playwright/test'
 import { ExtensionBusType, ExtensionMetaType, ExtensionUtilsType } from './types'
 
 export class BaseExtension {
@@ -29,11 +29,11 @@ export class BaseExtension {
 
   /* === API === === === === === === === === === === === === === === === === === === === === === === === === === === */
 
-  enableLogs() {
+  enableLogs(): void {
     this.logger.enable()
   }
 
-  disableLogs() {
+  disableLogs(): void {
     this.logger.disable()
   }
 }
