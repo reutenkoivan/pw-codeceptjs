@@ -12,6 +12,7 @@
   "files": [
     "lib",
     "src",
+    "doc",
     "README.md"
   ],
   "homepage": "https://reutenkoivan.github.io/pw-codeceptjs/",
