@@ -44,15 +44,6 @@ export type ExtensionUtilsType = {
   getPage: () => Promise<Page>
 }
 
-export type ExtensionBusType = {
-  browser: Browser;
-  browserName: string;
-  context: BrowserContext;
-  meta: ExtensionMetaType
-  extensionName: string;
-  utils: ExtensionUtilsType;
-}
-
 export class BaseExtension {
   protected readonly browser: Browser
   protected readonly context: BrowserContext

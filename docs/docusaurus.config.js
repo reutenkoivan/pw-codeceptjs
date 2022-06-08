@@ -5,7 +5,7 @@ const fs = require('fs')
 const path = require('path')
 const glob = require('glob')
 const lightCodeTheme = require('prism-react-renderer/themes/github')
-const darkCodeTheme = require('prism-react-renderer/themes/dracula')
+const darkCodeTheme = require('prism-react-renderer/themes/oceanicNext')
 
 const searchTranslations = {
   'search_placeholder': 'Search',
@@ -67,7 +67,6 @@ const config = {
     ],
   ],
   themeConfig:
-    /** @type {import('@docusaurus/theme-classic')} */
     ({
       navbar: {
         title: 'pw-codeceptjs',
