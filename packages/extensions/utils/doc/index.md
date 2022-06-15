@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-### Adding dependency.
+## Adding dependency
 
 <Tabs groupId="package-manager">
 <TabItem value="npm">
@@ -28,7 +28,7 @@ yarn add -D "@pw-codeceptjs/utils-extension"
 </TabItem>
 </Tabs>
 
-### Registration.
+## Registration
 
 ```typescript title='playwright.config.ts'
 import { CodeceptFixtureConfig } from '@pw-codeceptjs/test'

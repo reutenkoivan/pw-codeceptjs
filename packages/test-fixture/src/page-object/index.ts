@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import assert from 'assert'
 import { expect, Locator, Page, test } from '@playwright/test'
+import { PageScreenshotOptions } from 'playwright-core'
 
 import { Driver } from './driver'
 
@@ -167,7 +168,7 @@ export class CodeceptFixture extends Driver {
     })
   }
 
-  async fillField (text: string, { locator }: { locator: string }) {
+  async fillField (text: string, { locator }: { locator: string }): Promise<void> {
     const page = await this.getPage()
 
     await test.step('fillField', async () => {
@@ -238,6 +239,14 @@ export class CodeceptFixture extends Driver {
       })
 
       expect(extraCookies).toEqual([])
+    })
+  }
+
+  async makeScreenshot(options: PageScreenshotOptions = {}): Promise<void> {
+    const page = await this.getPage()
+
+    await test.step('makeScreenshot', async () => {
+      await page.screenshot(options)
     })
   }
 }

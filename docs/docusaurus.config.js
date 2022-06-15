@@ -52,14 +52,6 @@ const config = {
   ],
   plugins: [
     [
-      '@docusaurus/plugin-content-docs',
-      {
-        path: path.join(__dirname, 'content'),
-        showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
-      },
-    ],
-    [
       '@docusaurus/plugin-content-pages',
       {
         path: path.join(__dirname, 'src/pages'),
@@ -74,14 +66,7 @@ const config = {
           alt: 'Logo',
           src: 'logo.svg',
         },
-        items: [
-          {
-            type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Intro',
-          },
-        ],
+        items: [],
       },
       footer: {
         // eslint-disable-next-line max-len

@@ -1,22 +1,22 @@
 ---
-title: wait
-sidebar_label: wait
+title: "refreshPage"
 ---
 
-Pause test execution.
-
 ## API
+
 ```typescript
-interface Utils {
-    wait(seconds: number): Promise<void>
+interface I {
+  refreshPage(): Promise<void>
 }
 ```
 
 ## Example
+
 ```typescript
 import { test } from '@pw-codeceptjs/test'
 
 test('Example', async ({ I }) => {
-  await I.use.utils.wait(2)
+  await I.amOnPage('https://playwright.dev/')
+  await I.refreshPage()
 })
 ```
