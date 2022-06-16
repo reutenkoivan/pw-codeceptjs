@@ -1,6 +1,5 @@
 ---
 title: "amOnPage"
-sidebar_position: 1
 ---
 
 ## API
@@ -17,6 +16,6 @@ interface I {
 import { test } from '@pw-codeceptjs/test'
 
 test('Example', async ({ I }) => {
-  await I.amOnPage('https://playwright.dev/')
+  await I.amOnPage('https://playwright.dev')
 })
 ```

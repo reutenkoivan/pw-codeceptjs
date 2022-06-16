@@ -66,7 +66,14 @@ const config = {
           alt: 'Logo',
           src: 'logo.svg',
         },
-        items: [],
+        items: [
+          {
+            position: 'right',
+            href: 'https://github.com/reutenkoivan/pw-codeceptjs',
+            className: 'header-github-link',
+            'aria-label': 'Repository',
+          },
+        ],
       },
       footer: {
         // eslint-disable-next-line max-len

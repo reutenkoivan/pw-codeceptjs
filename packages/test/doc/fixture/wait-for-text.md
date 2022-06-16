@@ -1,6 +1,5 @@
 ---
 title: "waitForText"
-sidebar_position: 2
 ---
 
 ## API
@@ -17,7 +16,7 @@ interface I {
 import { test } from '@pw-codeceptjs/test'
 
 test('Example', async ({ I }) => {
-  await I.amOnPage('https://playwright.dev/')
+  await I.amOnPage('https://playwright.dev')
   await I.waitForText('Playwright', { locator: '.navbar__inner .navbar__title' })
 })
 ```
