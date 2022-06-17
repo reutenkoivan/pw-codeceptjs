@@ -5,7 +5,7 @@ const fs = require('fs')
 const path = require('path')
 const glob = require('glob')
 const lightCodeTheme = require('prism-react-renderer/themes/github')
-const darkCodeTheme = require('prism-react-renderer/themes/dracula')
+const darkCodeTheme = require('prism-react-renderer/themes/oceanicNext')
 
 const searchTranslations = {
   'search_placeholder': 'Search',
@@ -52,14 +52,6 @@ const config = {
   ],
   plugins: [
     [
-      '@docusaurus/plugin-content-docs',
-      {
-        path: path.join(__dirname, 'content'),
-        showLastUpdateAuthor: true,
-        showLastUpdateTime: true,
-      },
-    ],
-    [
       '@docusaurus/plugin-content-pages',
       {
         path: path.join(__dirname, 'src/pages'),
@@ -67,7 +59,6 @@ const config = {
     ],
   ],
   themeConfig:
-    /** @type {import('@docusaurus/theme-classic')} */
     ({
       navbar: {
         title: 'pw-codeceptjs',
@@ -77,10 +68,10 @@ const config = {
         },
         items: [
           {
-            type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Intro',
+            position: 'right',
+            href: 'https://github.com/reutenkoivan/pw-codeceptjs',
+            className: 'header-github-link',
+            'aria-label': 'Repository',
           },
         ],
       },
