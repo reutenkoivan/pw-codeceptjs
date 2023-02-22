@@ -59,8 +59,13 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Install dependencies
+        run: npm install
+
       - name: Build documentation.
-        run: cd docs && npm install && npm run build
+        env:
+          BASE_URL: '/pw-codeceptjs/'
+        run: npm run docs:build
 
       - name: Deploy into github pages
         uses: peaceiris/actions-gh-pages@v3

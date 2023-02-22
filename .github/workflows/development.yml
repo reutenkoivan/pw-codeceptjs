@@ -8,57 +8,21 @@ on:
 
 jobs:
 # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-  install:
-    runs-on: ubuntu-latest
+  development:
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '18'
       - name: Install dependencies
         run: npm ci
 
       - name: Build packages
         run: npm run build
 
-      - uses: actions/cache@v3
-        id: cache-install
-        with:
-          key: ${{ github.sha }}-${{ github.run_number }}-${{ github.run_attempt }}
-          path: ./*
-  # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-  test-lint:
-    needs:
-      - install
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - uses: actions/cache@v3
-        id: restore-install
-        with:
-          key: ${{ github.sha }}-${{ github.run_number }}-${{ github.run_attempt }}
-          path: ./*
-
       - name: Lint
         run: npm run lint
-  # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-  tests-integration:
-    needs:
-      - install
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - uses: actions/cache@v3
-        id: restore-install
-        with:
-          key: ${{ github.sha }}-${{ github.run_number }}-${{ github.run_attempt }}
-          path: ./*
 
       - name: Install Playwright
         run: npx playwright install --with-deps
@@ -66,21 +30,14 @@ jobs:
       - name: E2E Tests
         run: npm run test:int
 
+      - name: Build documentation.
+        env:
+          BASE_URL: '/pw-codeceptjs/'
+        run: npm run docs:build
+
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v2
         with:
           name: e2e-test-results
           path: playwright-report
-  # --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
-  build-documentation:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-
-      - name: Build documentation.
-        run: cd docs && npm install && npm run build
-# --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---

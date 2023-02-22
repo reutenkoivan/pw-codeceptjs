@@ -12,7 +12,8 @@
     "watch": "npm run references && tsc -b ./tsconfig.solution.json --watch",
     "lint": "TIMING=1 eslint . --ext .js,.ts,.tsx,.jsx --report-unused-disable-directives",
     "format": "eslint . --ext .js,.ts,.tsx,.jsx --fix",
-    "references": "node ./scripts/build/remove-tsc-output.js && node ./scripts/build/copy-none-ts-files.js && npx fix-ts-references --fix"
+    "references": "node ./scripts/build/remove-tsc-output.js && node ./scripts/build/copy-none-ts-files.js && npx fix-ts-references --fix",
+    "docs:build": "docusaurus-tde build"
   },
   "workspaces": [
     "packages/*",
@@ -21,7 +22,13 @@
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
-    "@playwright/test": "^1.19.2",
+    "@docusaurus-tde/cli": "^0.0.5",
+    "@docusaurus-tde/package-documentation-hook": "^0.0.5",
+    "@docusaurus-tde/react-pages-hook": "^0.0.5",
+    "@docusaurus-tde/components-theme": "^0.0.5",
+    "@docusaurus-tde/debug-hook": "^0.0.5",
+    "@docusaurus-tde/custom-css-hook": "^0.0.5",
+    "@playwright/test": "^1.20.0",
     "@tinkoff-monorepo/fix-ts-references": "^1.8.16",
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.21",

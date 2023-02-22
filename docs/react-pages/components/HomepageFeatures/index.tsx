@@ -1,6 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
+// @ts-ignore
 import CodeBlock from "@theme/CodeBlock";
+// @ts-ignore
 import styles from './styles.module.css';
 
 type FeatureItem = {
@@ -52,23 +54,16 @@ test.describe('Fixture', () => {
   },
 ];
 
-function Feature({ title, description, code, fileName, id }: FeatureItem): JSX.Element {
-  const textBlock = (
-    <div className="col col-1">
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </div>
-  )
-
-  const codeBlock = (
-    <CodeBlock language={'typescript'} title={fileName} children={code} />
-  )
-
-  const flow = [textBlock, codeBlock]
-
+function Feature({ title, description, code, fileName, id = 0 }: FeatureItem): JSX.Element {
   return (
-    <div className={clsx('row row--align-stretch margin-vert--lg')}>
-      { id % 2 === 0 ? flow : flow.reverse() }
+    <div style={{ width: '100%', padding: 10 }}>
+      <div>
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </div>
+    <div>
+      <CodeBlock language={'typescript'} title={fileName} children={code} />
+    </div>
     </div>
   );
 }
