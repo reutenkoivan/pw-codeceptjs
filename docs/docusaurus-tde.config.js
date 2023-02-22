@@ -19,7 +19,7 @@ module.exports = {
   hooks: [
     ['@docusaurus-tde/debug-hook', { enabled: !process.env.CI, logs: !!process.env.CI }],
     ['@docusaurus-tde/custom-css-hook', { source: './custom.css' }],
-    ['@docusaurus-tde/react-pages-hook', { root: path.join(__dirname, 'react-pages') }],
+    ['@docusaurus-tde/react-pages-hook', { root: path.join(__dirname, 'react-pages'), exclude: ['components/**'] }],
     ['@docusaurus-tde/package-documentation-hook', { dropdownBuilder }],
   ],
 }
